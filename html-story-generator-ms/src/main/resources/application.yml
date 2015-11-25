@@ -1,0 +1,18 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    healthcheck:
+      enabled: true
+      
+spring:
+  application:
+    name: html-generator-microservice
+    
+server:
+  port: 8888
+  
+logging:
+#   file: /var/memento/security.log
+  level:
+    org.springframework.web: 'DEBUG'
