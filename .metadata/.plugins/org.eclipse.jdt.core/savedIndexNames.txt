@@ -77,7 +77,6 @@ INDEX VERSION 1.127+C:\Users\JoseA\git\storyteller-microservices\.metadata\.plug
 4238691330.index
 3684793959.index
 3246897199.index
-2227838403.index
 2847660669.index
 1318741082.index
 1386023224.index
