@@ -1,4 +1,6 @@
-.metadata
+/.metadata
+/RemoteSystemsTempFiles
+/Servers
 /archimedes/bin
 /archimedes/.mvn
 /archimedes/.bin
