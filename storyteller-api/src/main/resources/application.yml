@@ -3,7 +3,7 @@ spring:
     name: storyteller-api
     
 server:
-  port: 7777
+  port: 9977
 
 eureka:
   client:
