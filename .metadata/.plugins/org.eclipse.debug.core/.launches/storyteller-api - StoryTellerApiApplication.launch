@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/storyteller-api/src/main/java/com/codependent/micro/StoryTellerApiApplication.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.m2e.launchconfig.classpathProvider"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.codependent.micro.StoryTellerApiApplication"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="storyteller-api"/>
+<stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.m2e.launchconfig.sourcepathProvider"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dspring.liveBeansView.mbeanDomain&#10;-Dcom.sun.management.jmxremote&#10;-Dcom.sun.management.jmxremote.port=45425&#10;-Dcom.sun.management.jmxremote.authenticate=false&#10;-Dcom.sun.management.jmxremote.ssl=false&#10;"/>
+</launchConfiguration>

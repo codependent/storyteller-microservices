@@ -22,3 +22,9 @@
 /storyteller-api/.settings
 /storyteller-api/.classpath
 /storyteller-api/.project
+/config-server/bin
+/config-server/.mvn
+/config-server/.bin
+/config-server/.settings
+/config-server/.classpath
+/config-server/.project
