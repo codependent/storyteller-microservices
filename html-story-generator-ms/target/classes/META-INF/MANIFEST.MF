@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Implementation-Title: html-generator-ms
+Implementation-Title: random-story-ms
 Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: JINGA4X
 Implementation-Vendor-Id: com.codependent.micro

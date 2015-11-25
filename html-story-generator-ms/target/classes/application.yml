@@ -1,16 +1,16 @@
+spring:
+  application:
+    name: random-story-microservice
+    
+server:
+  port: 8888
+
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
     healthcheck:
       enabled: true
-      
-spring:
-  application:
-    name: html-generator-microservice
-    
-server:
-  port: 8888
   
 logging:
 #   file: /var/memento/security.log
