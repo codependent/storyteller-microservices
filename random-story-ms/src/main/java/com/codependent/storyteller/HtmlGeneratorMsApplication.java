@@ -11,20 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
-
-import com.netflix.appinfo.InstanceInfo;
-import com.netflix.discovery.EurekaClient;
 
 @RestController
 @EnableEurekaClient
+@EnableCircuitBreaker
 @RefreshScope
 @SpringBootApplication
 public class HtmlGeneratorMsApplication {
@@ -35,22 +31,15 @@ public class HtmlGeneratorMsApplication {
 	private String message;
 	
 	@Autowired
-	private EurekaClient discoveryClient;
-	
-	@Autowired
 	private StoryService storyService;
-	
-	private RestTemplate restTemplate = new RestTemplate();
 	
 	@RequestMapping(value="/stories", params="random=true")
 	public String generateHtml(HttpServletResponse response) throws RestClientException, URISyntaxException{
 		logger.info("[{}] generateHtml()", message);
-		InstanceInfo ii = discoveryClient.getNextServerFromEureka("RANDOM-IMAGE-MICROSERVICE", false);
-		String homePageUrl = ii.getHomePageUrl();
-		Map<String, String> imageInfo = restTemplate.exchange(homePageUrl+"/images?random=true&fields=url", HttpMethod.GET, null, new ParameterizedTypeReference<Map<String,String>>() {}, new Object[]{}).getBody();
+		Map<String, String> randomImage = storyService.getRandomImage();
 		
 		String html = "<html><body>"+storyService.getRandomStory()+"</body></html>";
-		html = String.format(html, imageInfo.get("imageUrl"));
+		html = String.format(html, randomImage.get("imageUrl"));
 		response.setContentType("text/html");
 		return html;
 	}

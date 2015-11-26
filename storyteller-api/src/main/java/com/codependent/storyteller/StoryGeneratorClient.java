@@ -24,7 +24,7 @@ public class StoryGeneratorClient {
 		return story;
 	}
 	
-	public String defaultStory() {
+	protected String defaultStory() {
         return "<html><body>No stories available</body></html>";
     }
 	
