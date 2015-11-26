@@ -37,7 +37,7 @@ public class RandomImageMsApplication {
 	@Autowired
 	private ImageService imageService;
 	
-	@RequestMapping(value="/images", params={"random", "fields=url"})
+	@RequestMapping(value="/images", params={"random=true", "fields=url"})
     public Map<String, String> getRandomImageUrl(HttpServletRequest request) {
 		logger.info("[{}] getRandomImageUrl()", message);
 		String scheme = request.getScheme();

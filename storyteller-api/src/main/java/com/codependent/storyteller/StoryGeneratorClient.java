@@ -20,7 +20,7 @@ public class StoryGeneratorClient {
 	public String getRandomStory(){
 		InstanceInfo ii = discoveryClient.getNextServerFromEureka("RANDOM-STORY-MICROSERVICE", false);
 		String homePageUrl = ii.getHomePageUrl();
-		String story = restTemplate.getForObject(homePageUrl+"/stories", String.class);
+		String story = restTemplate.getForObject(homePageUrl+"/stories?random=true", String.class);
 		return story;
 	}
 	

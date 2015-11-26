@@ -42,12 +42,12 @@ public class HtmlGeneratorMsApplication {
 	
 	private RestTemplate restTemplate = new RestTemplate();
 	
-	@RequestMapping("/stories")
+	@RequestMapping(value="/stories", params="random=true")
 	public String generateHtml(HttpServletResponse response) throws RestClientException, URISyntaxException{
 		logger.info("[{}] generateHtml()", message);
 		InstanceInfo ii = discoveryClient.getNextServerFromEureka("RANDOM-IMAGE-MICROSERVICE", false);
 		String homePageUrl = ii.getHomePageUrl();
-		Map<String, String> imageInfo = restTemplate.exchange(homePageUrl+"/images?random&fields=url", HttpMethod.GET, null, new ParameterizedTypeReference<Map<String,String>>() {}, new Object[]{}).getBody();
+		Map<String, String> imageInfo = restTemplate.exchange(homePageUrl+"/images?random=true&fields=url", HttpMethod.GET, null, new ParameterizedTypeReference<Map<String,String>>() {}, new Object[]{}).getBody();
 		
 		String html = "<html><body>"+storyService.getRandomStory()+"</body></html>";
 		html = String.format(html, imageInfo.get("imageUrl"));
