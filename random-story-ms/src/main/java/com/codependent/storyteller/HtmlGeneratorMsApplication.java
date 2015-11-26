@@ -1,13 +1,17 @@
-package com.codependent.micro;
+package com.codependent.storyteller;
 
 import java.net.URISyntaxException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -21,10 +25,14 @@ import com.netflix.discovery.EurekaClient;
 
 @RestController
 @EnableEurekaClient
+@RefreshScope
 @SpringBootApplication
 public class HtmlGeneratorMsApplication {
 
-	private RestTemplate restTemplate = new RestTemplate();
+	private Logger logger = LoggerFactory.getLogger(getClass());
+	
+	@Value("${random-story-ms-message}")
+	private String message;
 	
 	@Autowired
 	private EurekaClient discoveryClient;
@@ -32,11 +40,14 @@ public class HtmlGeneratorMsApplication {
 	@Autowired
 	private StoryService storyService;
 	
-	@RequestMapping("/")
+	private RestTemplate restTemplate = new RestTemplate();
+	
+	@RequestMapping("/stories")
 	public String generateHtml(HttpServletResponse response) throws RestClientException, URISyntaxException{
+		logger.info("[{}] generateHtml()", message);
 		InstanceInfo ii = discoveryClient.getNextServerFromEureka("RANDOM-IMAGE-MICROSERVICE", false);
 		String homePageUrl = ii.getHomePageUrl();
-		Map<String, String> imageInfo = restTemplate.exchange(homePageUrl, HttpMethod.GET, null, new ParameterizedTypeReference<Map<String,String>>() {}, new Object[]{}).getBody();
+		Map<String, String> imageInfo = restTemplate.exchange(homePageUrl+"/images?random&fields=url", HttpMethod.GET, null, new ParameterizedTypeReference<Map<String,String>>() {}, new Object[]{}).getBody();
 		
 		String html = "<html><body>"+storyService.getRandomStory()+"</body></html>";
 		html = String.format(html, imageInfo.get("imageUrl"));

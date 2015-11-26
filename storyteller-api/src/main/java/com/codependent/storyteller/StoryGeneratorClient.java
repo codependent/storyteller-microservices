@@ -1,4 +1,4 @@
-package com.codependent.micro;
+package com.codependent.storyteller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class StoryGeneratorClient {
 	public String getRandomStory(){
 		InstanceInfo ii = discoveryClient.getNextServerFromEureka("RANDOM-STORY-MICROSERVICE", false);
 		String homePageUrl = ii.getHomePageUrl();
-		String story = restTemplate.getForObject(homePageUrl, String.class);
+		String story = restTemplate.getForObject(homePageUrl+"/stories", String.class);
 		return story;
 	}
 	

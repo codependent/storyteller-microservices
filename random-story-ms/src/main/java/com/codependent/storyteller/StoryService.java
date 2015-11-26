@@ -1,4 +1,4 @@
-package com.codependent.micro;
+package com.codependent.storyteller;
 
 import org.springframework.stereotype.Service;
 

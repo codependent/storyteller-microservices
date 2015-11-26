@@ -1,6 +1,10 @@
 spring:
   application:
     name: storyteller-api
+  cloud:
+    config:
+      discovery:
+        enabled: true
     
 server:
   port: 9977

@@ -1,7 +1,5 @@
 server:
   port: 8888
-  application:
-    name: configserver
 
 info:
   description: Spring Cloud Config Server
@@ -20,5 +18,5 @@ spring:
     config:
       server:
         git:
-#         uri: https://github.com/codependent/storyteller-microservices-config
-          uri: file:///C:/SoftDesarrollo/6-Workspaces/sts/storyteller-microservices-config
+          uri: https://github.com/codependent/storyteller-microservices-config
+#         uri: file:///C:/SoftDesarrollo/6-Workspaces/sts/storyteller-microservices-config

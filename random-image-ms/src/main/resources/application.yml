@@ -1,7 +1,11 @@
 spring:
   application:
     name: random-image-microservice
-    
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        
 server:
   port: 9999
 

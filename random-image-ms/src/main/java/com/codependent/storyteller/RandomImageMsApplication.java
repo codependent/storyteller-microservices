@@ -1,4 +1,4 @@
-package com.codependent.micro;
+package com.codependent.storyteller;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,9 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,15 +25,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @EnableEurekaClient
+@RefreshScope
 @SpringBootApplication
 public class RandomImageMsApplication {
 
+	private Logger logger = LoggerFactory.getLogger(getClass());
+	
+	@Value("${random-image-ms-message}")
+	private String message;
+	
 	@Autowired
 	private ImageService imageService;
 	
-	@RequestMapping("/")
+	@RequestMapping(value="/images", params={"random", "fields=url"})
     public Map<String, String> getRandomImageUrl(HttpServletRequest request) {
-		
+		logger.info("[{}] getRandomImageUrl()", message);
 		String scheme = request.getScheme();
 		String server = request.getServerName();
 		int port = request.getServerPort();

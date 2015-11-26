@@ -1,6 +1,10 @@
 spring:
   application:
     name: random-story-microservice
+  cloud:
+    config:
+      discovery:
+        enabled: true
     
 server:
   port: 9988
