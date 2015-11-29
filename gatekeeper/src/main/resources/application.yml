@@ -25,6 +25,27 @@ zuul:
       path: /stories/**
       stripPrefix: false    
   
+#ribbon:
+#  ReadTimeout: 10000
+
+
+
+#hystrix:
+#  command:
+#    random-story-microserviceRibbonCommand:
+#      execution:
+#        isolation:
+#          strategy: THREAD
+#          thread:
+#            timeoutInMilliseconds: 20000
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false 
+  
 logging:
 #   file: /var/memento/security.log
   level:
