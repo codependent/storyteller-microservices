@@ -1,3 +1,6 @@
+spring:
+  name: archimedes
+
 server:
   port: ${PORT:8761}
         

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: storyteller-api
+    name: gatekeeper
   cloud:
     config:
       discovery:
@@ -16,6 +16,14 @@ eureka:
     healthcheck:
       enabled: true
 #   registerWithEureka: false
+
+zuul:
+  prefix: /api
+  ignoredServices: '*'
+  routes:
+    random-story-microservice:
+      path: /stories/**
+      stripPrefix: false    
   
 logging:
 #   file: /var/memento/security.log

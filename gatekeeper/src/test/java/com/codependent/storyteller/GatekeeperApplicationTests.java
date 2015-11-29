@@ -5,11 +5,9 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.codependent.storyteller.StoryTellerApiApplication;
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = StoryTellerApiApplication.class)
-public class RandomImageMsApplicationTests {
+@SpringApplicationConfiguration(classes = GatekeeperApplication.class)
+public class GatekeeperApplicationTests {
 
 	@Test
 	public void contextLoads() {
