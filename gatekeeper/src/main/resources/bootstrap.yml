@@ -5,7 +5,13 @@ spring:
     config:
       discovery:
         enabled: true
-    
+      failFast: true
+      retry:
+        maxAttempts: 100
+        initialInterval: 2000
+        maxInterval: 3000
+        multiplier: 1.5
+        
 server:
   port: 9977
 
