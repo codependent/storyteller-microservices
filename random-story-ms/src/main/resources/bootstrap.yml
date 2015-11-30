@@ -1,6 +1,6 @@
 spring:
   application:
-    name: random-story-microservice
+    name: stories-microservice
   cloud:
     config:
       discovery:

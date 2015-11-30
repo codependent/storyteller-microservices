@@ -31,7 +31,7 @@ public class RandomImageMsApplication {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
-	@Value("${random-image-ms-message}")
+	@Value("${images-ms-message}")
 	private String message;
 	
 	@Autowired

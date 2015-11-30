@@ -33,7 +33,7 @@ public class StoryService {
 	
 	@HystrixCommand(fallbackMethod="imageServiceNotAvailable")
 	public Map<String, String> getRandomImage(){
-		InstanceInfo ii = discoveryClient.getNextServerFromEureka("RANDOM-IMAGE-MICROSERVICE", false);
+		InstanceInfo ii = discoveryClient.getNextServerFromEureka("IMAGES-MICROSERVICE", false);
 		String homePageUrl = ii.getHomePageUrl();
 		Map<String, String> imageInfo = restTemplate.exchange(homePageUrl+"/images?random=true&fields=url", HttpMethod.GET, null, new ParameterizedTypeReference<Map<String,String>>() {}, new Object[]{}).getBody();
 		return imageInfo;

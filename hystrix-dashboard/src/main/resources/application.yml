@@ -6,6 +6,6 @@ server:
   port: 10000
   
 turbine:
-  appConfig: random-story-microservice,storyteller-api
+  appConfig: stories-microservice,storyteller-api
   instanceUrlSuffix: /hystrix.stream
   clusterNameExpression: new String("default")

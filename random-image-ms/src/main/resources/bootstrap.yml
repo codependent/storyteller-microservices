@@ -1,6 +1,6 @@
 spring:
   application:
-    name: random-image-microservice
+    name: images-microservice
   cloud:
     config:
       discovery:

@@ -27,7 +27,7 @@ public class HtmlGeneratorMsApplication {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
-	@Value("${random-story-ms-message}")
+	@Value("${stories-ms-message}")
 	private String message;
 	
 	@Autowired
