@@ -18,7 +18,7 @@ public class StoryGeneratorClient {
 	
 	@HystrixCommand(fallbackMethod = "defaultStory")
 	public String getRandomStory(){
-		InstanceInfo ii = discoveryClient.getNextServerFromEureka("RANDOM-STORY-MICROSERVICE", false);
+		InstanceInfo ii = discoveryClient.getNextServerFromEureka("STORIES-MICROSERVICE", false);
 		String homePageUrl = ii.getHomePageUrl();
 		String story = restTemplate.getForObject(homePageUrl+"/stories?random=true", String.class);
 		return story;
