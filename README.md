@@ -7,7 +7,7 @@ Storyteller Microservices implemented with Spring Boot + Spring Cloud Netflix
 * **hystrix-dashboard**: aggretated metrics using Turbine. IMPORTANT: overrides some Turbine files to allow having multiple applications on the same host. [More info](https://github.com/Netflix/Turbine/pull/105). Endpoint: `http://localhost:10000`
 * **images-ms**: mid-tier Eureka Client that returns a random image URL. Endpoint: `http://localhost:9999/images?random=true&fields=url`
 * **stories-ms**: mid-tier Eureka Client that generates a random HTML story inserting a random image gotten from the previous service. Endpoint: `http://localhost:9988/stories?random=true`
-* **storyteller-api**: API Eureka Client that invokes random-story-ms to get random a story. Endpoint: `http://localhost:9977/api/stories?random=true`
+* **storyteller-api**: (master branch) API Eureka Client that invokes random-story-ms to get random a story. Endpoint: `http://localhost:9977/api/stories?random=true`
 * **gatekeeper**: (zuul branch) Zuul edge service that substitutes storyteller-api as the external entry point. Endpoint: `http://localhost:9977/api/stories?random=true`
 
 This structure tries to simulate a scenario like the following:
