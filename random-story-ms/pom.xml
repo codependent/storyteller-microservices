@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.codependent.storyteller</groupId>
-	<artifactId>random-story-ms</artifactId>
+	<artifactId>stories-ms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>random-story-ms</name>
+	<name>stories-ms</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
