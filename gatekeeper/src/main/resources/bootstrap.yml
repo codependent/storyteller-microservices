@@ -27,7 +27,7 @@ zuul:
   prefix: /api
   ignoredServices: '*'
   routes:
-    random-story-microservice:
+    stories-microservice:
       path: /stories/**
       stripPrefix: false    
   
@@ -38,7 +38,7 @@ zuul:
 
 #hystrix:
 #  command:
-#    random-story-microserviceRibbonCommand:
+#    stories-microserviceRibbonCommand:
 #      execution:
 #        isolation:
 #          strategy: THREAD
