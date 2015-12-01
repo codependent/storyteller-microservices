@@ -9,3 +9,6 @@ turbine:
   appConfig: gatekeeper,stories-microservice
   instanceUrlSuffix: /hystrix.stream
   clusterNameExpression: new String("default")
+  instanceInsertPort:
+    default: false
+  combineHostPort: true 
