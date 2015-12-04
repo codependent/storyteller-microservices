@@ -30,9 +30,9 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-eureka</artifactId>
-		</dependency>
+	        <groupId>org.springframework.cloud</groupId>
+	        <artifactId>spring-cloud-starter-consul-all</artifactId>
+	    </dependency>
 	
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -51,7 +51,7 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-starter-parent</artifactId>
-				<version>1.0.0.BUILD-SNAPSHOT</version>
+				<version>Brixton.BUILD-SNAPSHOT</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>

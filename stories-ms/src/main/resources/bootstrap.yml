@@ -11,17 +11,14 @@ spring:
         initialInterval: 2000
         maxInterval: 3000
         multiplier: 1.5
+      consul:
+        server:
+          host: localhost
+          port: 8500
         
 server:
   port: 9988
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-    healthcheck:
-      enabled: true
-  
 logging:
 #   file: /var/memento/security.log
   level:

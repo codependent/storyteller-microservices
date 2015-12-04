@@ -1,18 +1,19 @@
 package com.codependent.storyteller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.netflix.appinfo.InstanceInfo;
-import com.netflix.discovery.EurekaClient;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @Service
@@ -27,14 +28,17 @@ public class StoryService {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
-	private EurekaClient discoveryClient;
+	private DiscoveryClient discoveryClient;
 	
 	private RestTemplate restTemplate = new RestTemplate();
 	
 	@HystrixCommand(fallbackMethod="imageServiceNotAvailable")
 	public Map<String, String> getRandomImage(){
-		InstanceInfo ii = discoveryClient.getNextServerFromEureka("IMAGES-MICROSERVICE", false);
-		String homePageUrl = ii.getHomePageUrl();
+		List<ServiceInstance> instances = discoveryClient.getInstances("IMAGES-MICROSERVICE");
+		String homePageUrl = null;
+		if (instances != null && instances.size() > 0 ) {
+			homePageUrl = instances.get(0).getUri().toString();
+	    }
 		Map<String, String> imageInfo = restTemplate.exchange(homePageUrl+"/images?random=true&fields=url", HttpMethod.GET, null, new ParameterizedTypeReference<Map<String,String>>() {}, new Object[]{}).getBody();
 		return imageInfo;
 	}
