@@ -1,15 +1,38 @@
+---
+spring:
+  profiles: archimedes1
+
 server:
   port: ${PORT:8761}
         
 eureka:
   instance:
-    hostname: localhost
+    hostname: archimedes1
   client:
-    registerWithEureka: false
-    fetchRegistry: false
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
-  server:
+      defaultZone: http://archimedes2:8762/eureka/
+#  server:
+#   enableSelfPreservation: false
+#   waitTimeInMsWhenSyncEmpty: 0
+logging:
+#   file: /var/memento/security.log
+    level:
+        org.springframework.web: 'DEBUG'
+---
+
+spring:
+  profiles: archimedes2
+
+server:
+  port: ${PORT:8762}
+        
+eureka:
+  instance:
+    hostname: archimedes2
+  client:
+    serviceUrl:
+      defaultZone: http://archimedes1:8761/eureka/
+#  server:
 #   enableSelfPreservation: false
 #   waitTimeInMsWhenSyncEmpty: 0
 

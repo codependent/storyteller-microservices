@@ -18,7 +18,7 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://archimedes2:8762/eureka/
     healthcheck:
       enabled: true
   
