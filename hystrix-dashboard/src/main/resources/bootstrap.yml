@@ -15,6 +15,6 @@ turbine:
   appConfig: stories-microservice,storyteller-api
   instanceUrlSuffix: /hystrix.stream
   clusterNameExpression: new String("default")
-  instanceInsertPort:
-    default: false
-  combineHostPort: true 
+#  instanceInsertPort:
+#    default: false
+#  combineHostPort: true 
