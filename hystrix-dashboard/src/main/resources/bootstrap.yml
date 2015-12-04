@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: hystrix-dashboard
+  cloud:
+    config:
+      consul:
+        server:
+          host: localhost
+          port: 8500
+
+server:
+  port: 10000
+  
+turbine:
+  appConfig: stories-microservice,storyteller-api
+  instanceUrlSuffix: /hystrix.stream
+  clusterNameExpression: new String("default")
+  instanceInsertPort:
+    default: false
+  combineHostPort: true 
