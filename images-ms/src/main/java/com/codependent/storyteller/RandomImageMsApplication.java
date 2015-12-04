@@ -19,6 +19,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,9 +38,12 @@ public class RandomImageMsApplication {
 	@Autowired
 	private ImageService imageService;
 	
+	@Autowired
+	private Environment environment;
+	
 	@RequestMapping(value="/images", params={"random=true", "fields=url"})
     public Map<String, String> getRandomImageUrl(HttpServletRequest request) {
-		logger.info("[{}] getRandomImageUrl()", message);
+		logger.info("[{}] - env[{}] getRandomImageUrl()", message, environment.getActiveProfiles());
 		String scheme = request.getScheme();
 		String server = request.getServerName();
 		int port = request.getServerPort();
