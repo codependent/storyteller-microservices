@@ -22,6 +22,14 @@ eureka:
     healthcheck:
       enabled: true
 #   registerWithEureka: false
+
+hystrix:
+  command:
+    getStory:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000       
   
 logging:
 #   file: /var/memento/security.log
