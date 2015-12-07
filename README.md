@@ -22,4 +22,4 @@ One API service exposed to clients and two mid tier services, all of them sharin
 * **no-config-server**: same as master without using a centralized config-server.
 * **zuul**: uses a zuul reverse-proxy instead of storyteller-api gateway.
 * **eureka-peers**: high availability environment using two eureka registers and two images-ms microservices
-* **consul**: Consul replaces replaces Eureka Server as microservices registry.
+* **consul**: Consul replaces Eureka Server as microservice registry.
