@@ -18,7 +18,7 @@ One API service exposed to clients and two mid tier services, all of them sharin
 
 ***Branch differences***
 
-* **master**: storyteller-api acts as a gateway for the internal microservices.
+* **master**: storyteller-api acts as a gateway for the internal microservices and uses a Feign client to invoke stories-ms. **[At the moment](https://github.com/Netflix/feign/issues/298) there is no way to specify a fallback method for Feign clients.**
 * **no-config-server**: same as master without using a centralized config-server.
 * **zuul**: uses a zuul reverse-proxy instead of storyteller-api gateway.
 * **eureka-peers**: high availability environment using two eureka registers and two images-ms microservices
