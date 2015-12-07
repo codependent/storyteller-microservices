@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
@@ -21,6 +22,7 @@ import org.springframework.web.client.RestClientException;
 @RestController
 @EnableEurekaClient
 @EnableCircuitBreaker
+@EnableFeignClients
 @RefreshScope
 @SpringBootApplication
 public class HtmlGeneratorMsApplication {
@@ -33,10 +35,13 @@ public class HtmlGeneratorMsApplication {
 	@Autowired
 	private StoryService storyService;
 	
+	@Autowired
+	private ImagesClient imagesClient;
+	
 	@RequestMapping(value="/stories", params="random=true")
 	public String generateHtml(HttpServletResponse response) throws RestClientException, URISyntaxException{
 		logger.info("[{}] generateHtml()", message);
-		Map<String, String> randomImage = storyService.getRandomImage();
+		Map<String, String> randomImage = imagesClient.getImage(true, "url");
 		
 		String html = "<html><body>"+storyService.getRandomStory()+"</body></html>";
 		html = String.format(html, randomImage.get("imageUrl"));

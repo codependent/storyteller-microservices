@@ -6,14 +6,9 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @Service
 public class StoryService {
@@ -29,7 +24,8 @@ public class StoryService {
 	@Autowired
 	private EurekaClient discoveryClient;
 	
-	private RestTemplate restTemplate = new RestTemplate();
+	/*
+	//private RestTemplate restTemplate = new RestTemplate();
 	
 	@HystrixCommand(fallbackMethod="imageServiceNotAvailable")
 	public Map<String, String> getRandomImage(){
@@ -38,6 +34,7 @@ public class StoryService {
 		Map<String, String> imageInfo = restTemplate.exchange(homePageUrl+"/images?random=true&fields=url", HttpMethod.GET, null, new ParameterizedTypeReference<Map<String,String>>() {}, new Object[]{}).getBody();
 		return imageInfo;
 	}
+	*/
 	
 	public String getRandomStory(){
 		long random = Math.round(Math.random()*(stories.length-1));

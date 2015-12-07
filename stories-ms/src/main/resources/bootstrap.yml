@@ -22,7 +22,18 @@ eureka:
     healthcheck:
       enabled: true
   
+images-microservice:
+  ribbon:
+    MaxAutoRetriesNextServer: 2
+    OkToRetryOnAllOperations: true
+
+stories-microservice:
+  ribbon:
+    MaxAutoRetriesNextServer: 2
+    OkToRetryOnAllOperations: true
+  
 logging:
 #   file: /var/memento/security.log
   level:
-    org.springframework.web: 'DEBUG'
+    org.springframework.web: 'error'
+    com.netflix: 'DEBUG'
