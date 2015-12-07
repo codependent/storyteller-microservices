@@ -15,3 +15,11 @@ This structure tries to simulate a scenario like the following:
 ![Microservices architecture](https://raw.githubusercontent.com/codependent/storyteller-microservices/master/diagram.png)
 
 One API service exposed to clients and two mid tier services, all of them sharing a Eureka server instance (Archimedes) and a ConfigServer that loads the properties from a Git repo.
+
+***Branch differences***
+
+* **master**: storyteller-api acts as a gateway for the internal microservices.
+* **no-config-server**: same as master without using a centralized config-server.
+* **zuul**: uses a zuul reverse-proxy instead of storyteller-api gateway.
+* **eureka-peers**: high availability environment using two eureka registers and two images-ms microservices
+* **consul**: Consul replaces replaces Eureka Server as microservices registry.
