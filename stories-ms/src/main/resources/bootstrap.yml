@@ -32,6 +32,7 @@ hystrix:
 
 images-microservice:
   ribbon:
+    ConnectTimeout: 250
     OkToRetryOnAllOperations: true
     MaxAutoRetriesNextServer: 2
     MaxAutoRetries: 2
@@ -39,5 +40,5 @@ images-microservice:
 logging:
 #   file: /var/memento/security.log
   level:
-    org.springframework.web: 'error'
+    org.springframework.web: 'ERROR'
     com.netflix: 'DEBUG'
