@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: gatekeeper
+  cloud:
+    config:
+      discovery:
+        enabled: true
+      failFast: true
+      retry:
+        maxAttempts: 100
+        initialInterval: 2000
+        maxInterval: 3000
+        multiplier: 1.5
+        
+server:
+  port: 9966
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    healthcheck:
+      enabled: true
+#   registerWithEureka: false
+
+zuul:
+  prefix: /api
+  ignoredServices: '*'
+  routes:
+    storyteller-api:
+      path: /stories/**
+      stripPrefix: false    
+  
+#ribbon:
+#  ReadTimeout: 10000
+
+
+
+hystrix:
+  command:
+    storyteller-api:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 2000
+
+logging:
+#   file: /var/memento/security.log
+  level:
+    org.springframework.web: 'DEBUG'
