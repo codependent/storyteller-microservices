@@ -70,7 +70,14 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 2000       
+            timeoutInMilliseconds: 2000    
+            
+stories-microservice:
+  ribbon:
+    ConnectTimeout: 250
+    OkToRetryOnAllOperations: true
+    MaxAutoRetriesNextServer: 2
+    MaxAutoRetries: 2   
   
 logging:
 #   file: /var/memento/security.log

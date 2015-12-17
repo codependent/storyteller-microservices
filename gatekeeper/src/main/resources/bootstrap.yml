@@ -43,9 +43,17 @@ hystrix:
         isolation:
           strategy: THREAD
           thread:
-            timeoutInMilliseconds: 2000
+            timeoutInMilliseconds: 10000
+
+storyteller-api:
+  ribbon:
+    ConnectTimeout: 250
+    OkToRetryOnAllOperations: true
+    MaxAutoRetriesNextServer: 2
+    MaxAutoRetries: 0
 
 logging:
 #   file: /var/memento/security.log
   level:
     org.springframework.web: 'DEBUG'
+    com.netflix: 'DEBUG'
