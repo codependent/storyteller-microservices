@@ -13,7 +13,7 @@ eureka:
       enabled: true
   
 turbine:
-  appConfig: stories-microservice,storyteller-api
+  appConfig: gatekeeper,stories-microservice,storyteller-api
   instanceUrlSuffix: /hystrix.stream
   clusterNameExpression: new String("default")
   instanceInsertPort:

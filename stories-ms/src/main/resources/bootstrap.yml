@@ -1,6 +1,8 @@
+---
 spring:
   application:
     name: stories-microservice
+  profiles: stories1
   cloud:
     config:
       discovery:
@@ -14,6 +16,52 @@ spring:
         
 server:
   port: 9988
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://archimedes1:8761/eureka/,http://archimedes2:8762/eureka/
+    healthcheck:
+      enabled: true
+  
+hystrix:
+  command:
+    getImage:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+images-microservice:
+  ribbon:
+    ConnectTimeout: 250
+    OkToRetryOnAllOperations: true
+    MaxAutoRetriesNextServer: 2
+    MaxAutoRetries: 2
+  
+logging:
+#   file: /var/memento/security.log
+  level:
+    org.springframework.web: 'ERROR'
+    com.netflix: 'DEBUG'
+---
+spring:
+  application:
+    name: stories-microservice
+  profiles: stories2
+  cloud:
+    config:
+      discovery:
+        enabled: true
+      failFast: true
+      retry:
+        maxAttempts: 100
+        initialInterval: 2000
+        maxInterval: 3000
+        multiplier: 1.5
+        
+server:
+  port: 9987
 
 eureka:
   client:

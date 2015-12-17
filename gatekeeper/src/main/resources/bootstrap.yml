@@ -24,11 +24,11 @@ eureka:
 #   registerWithEureka: false
 
 zuul:
-  prefix: /api
+#  prefix: /api
   ignoredServices: '*'
   routes:
     storyteller-api:
-      path: /stories/**
+      path: /api/stories/**
       stripPrefix: false    
   
 #ribbon:
