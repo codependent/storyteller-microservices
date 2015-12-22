@@ -21,5 +21,6 @@ One API service exposed to clients and two mid tier services, all of them sharin
 * **master**: storyteller-api acts as a gateway for the internal microservices and uses a Feign client to invoke stories-ms. **[At the moment](https://github.com/Netflix/feign/issues/298) there is no way to specify a fallback method for Feign clients.**
 * **no-config-server**: same as master without using a centralized config-server.
 * **zuul**: uses a zuul reverse-proxy instead of storyteller-api gateway.
-* **high-availability**: high availability environment using two eureka registers, a zuul reverse proxy, and 2 instances of each service
+* **high-availability**: high availability environment using two eureka registers, a zuul reverse proxy, and 2 instances of each service.
+* **high-availability-rxjava**: Same as above but using reactive programming.
 * **consul**: Consul replaces Eureka Server as microservice registry.
