@@ -5,11 +5,9 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.codependent.storyteller.HtmlGeneratorMsApplication;
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = HtmlGeneratorMsApplication.class)
-public class HtmlGeneratorMsApplicationTests {
+@SpringApplicationConfiguration(classes = StoryGeneratorMsApplication.class)
+public class StoryGeneratorMsApplicationTests {
 
 	@Test
 	public void contextLoads() {

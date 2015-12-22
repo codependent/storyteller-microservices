@@ -2,6 +2,8 @@ package com.codependent.storyteller;
 
 import org.springframework.stereotype.Service;
 
+import rx.Observable;
+
 @Service
 public class ImageService {
 
@@ -17,9 +19,9 @@ public class ImageService {
 		"minion-wolverine.jpg"
 	};
 	
-	public String getRandomImage(){
+	public Observable<String> getRandomImage(){
 		long random = Math.round(Math.random()*(images.length-1));
-		return images[(int)random];
+		return Observable.just(images[(int)random]);
 	}
 	
 }

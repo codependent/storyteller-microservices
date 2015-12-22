@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import rx.Observable;
+
 @RestController
 @EnableEurekaClient
 @RefreshScope
@@ -42,14 +44,18 @@ public class RandomImageMsApplication {
 	private Environment environment;
 	
 	@RequestMapping(value="/images", params={"random=true", "fields=url"})
-    public Map<String, String> getRandomImageUrl(HttpServletRequest request) {
+    public Observable<Map<String, String>> getRandomImageUrl(HttpServletRequest request) {
 		logger.info("[{}] - env[{}] getRandomImageUrl()", message, environment.getActiveProfiles());
-		String scheme = request.getScheme();
-		String server = request.getServerName();
-		int port = request.getServerPort();
-		Map<String, String> image = new HashMap<String, String>();
-		image.put("imageUrl", scheme+"://"+server+":"+port+"/images/"+imageService.getRandomImage());
-        return image;
+		Observable<Map<String, String>> randomImage = imageService.getRandomImage()
+			.map((img)->{
+				String scheme = request.getScheme();
+				String server = request.getServerName();
+				int port = request.getServerPort();
+				Map<String, String> imageMap = new HashMap<String, String>();
+				imageMap.put("imageUrl", scheme+"://"+server+":"+port+"/images/"+img);
+				return imageMap;
+			});
+        return randomImage;
     }
 	
 	@RequestMapping("/images/{image:.+}")

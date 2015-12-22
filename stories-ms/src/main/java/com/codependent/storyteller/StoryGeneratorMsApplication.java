@@ -1,7 +1,6 @@
 package com.codependent.storyteller;
 
 import java.net.URISyntaxException;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,13 +18,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
 
+import rx.Observable;
+
 @RestController
 @EnableEurekaClient
 @EnableCircuitBreaker
 @EnableFeignClients
 @RefreshScope
 @SpringBootApplication
-public class HtmlGeneratorMsApplication {
+public class StoryGeneratorMsApplication {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
@@ -35,21 +36,14 @@ public class HtmlGeneratorMsApplication {
 	@Autowired
 	private StoryService storyService;
 	
-	@Autowired
-	private ImagesClient imagesClient;
-	
 	@RequestMapping(value="/stories", params="random=true")
-	public String generateHtml(HttpServletResponse response) throws RestClientException, URISyntaxException{
+	public Observable<String> getRandomStory(HttpServletResponse response) throws RestClientException, URISyntaxException{
 		logger.info("[{}] generateHtml()", message);
-		Map<String, String> randomImage = imagesClient.getImage(true, "url");
-		
-		String html = "<html><body>"+storyService.getRandomStory()+"</body></html>";
-		html = String.format(html, randomImage.get("imageUrl"));
-		response.setContentType("text/html");
-		return html;
+		Observable<String> story = storyService.getRandomStory();
+		return story;
 	}
 	
     public static void main(String[] args) {
-        SpringApplication.run(HtmlGeneratorMsApplication.class, args);
+        SpringApplication.run(StoryGeneratorMsApplication.class, args);
     }
 }
