@@ -2,6 +2,8 @@
 
 Storyteller Microservices implemented with Spring Boot + Spring Cloud Netflix in a high availability environment
 
+This implementation uses Observable extensively to adhere to reactive programming.
+
 * **2 archimedes instances**: acts as Eureka Server. Endpoints: `http://archimedes1:8761` and `http://archimedes2:8762`.
 * **1 config-server**: external config server from a [Git Repo](https://github.com/codependent/storyteller-microservices-config). Endpoint: `http://localhost:8888`.
 * **1 hystrix-dashboard**: aggretated metrics using Turbine. Endpoint: `http://localhost:10000`.
@@ -12,6 +14,6 @@ Storyteller Microservices implemented with Spring Boot + Spring Cloud Netflix in
 
 This structure tries to simulate a scenario like the following:
 
-![Microservices architecture](https://raw.githubusercontent.com/codependent/storyteller-microservices/high-availability/diagram.png)
+![Microservices architecture](https://raw.githubusercontent.com/codependent/storyteller-microservices/high-availability-rxjava/diagram.png)
 
 One API service exposed to clients and two mid tier services, all of them sharing a Eureka server instance (Archimedes) and a ConfigServer that loads the properties from a Git repo.
