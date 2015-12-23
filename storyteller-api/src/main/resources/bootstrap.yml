@@ -36,7 +36,10 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 10000                    
+            timeoutInMilliseconds: 10000
+  threadpool:
+    default:
+      coreSize: 50                                
 
 stories-microservice:
   ribbon:
@@ -94,7 +97,10 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 10000                    
+            timeoutInMilliseconds: 10000
+  threadpool:
+    default:
+      coreSize: 50                   
 
 stories-microservice:
   ribbon:

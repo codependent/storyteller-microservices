@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import rx.Observable;
-import rx.schedulers.Schedulers;
 
 import com.netflix.hystrix.HystrixCommand;
 
@@ -48,14 +47,33 @@ public class StoryTellerApiApplication {
 		
 		//GET STORY
 		HystrixCommand<String> randomStoryCommand = ssc.getStory(true);
-		Observable<String> randomStory = randomStoryCommand.toObservable().subscribeOn(Schedulers.io());
+		Observable<String> randomStory = randomStoryCommand.toObservable();
 
 		//GET IMAGE
 		HystrixCommand<Map<String, String>>  randomImageCommand = isc.getImage(true, "url");
-		Observable<Map<String, String>> randomImage = randomImageCommand.toObservable().subscribeOn(Schedulers.io());
+		Observable<Map<String, String>> randomImage = randomImageCommand.toObservable();
 		
 		//COMPOSE AND PROCESS
 		Observable<String> result = Observable.zip(randomStory, randomImage, (String story, Map<String, String> image) -> {
+			return String.format(HTML, story, image.get("imageUrl"));
+		});
+		return result;
+    }
+	
+	@RequestMapping(value="/stories", params={"random=true","format=html", "parallel=false"}, produces="text/html")
+    public Observable<String> getRandomHtmlStorySerialExecution() {
+		logger.info("[{}] getRandomHtmlStory()", message);
+		
+		//GET STORY
+		HystrixCommand<String> randomStoryCommand = ssc.getStory(true);
+		 String randomStory = randomStoryCommand.execute();
+
+		//GET IMAGE
+		HystrixCommand<Map<String, String>>  randomImageCommand = isc.getImage(true, "url");
+		Map<String, String> randomImage = randomImageCommand.execute();
+		
+		//COMPOSE AND PROCESS
+		Observable<String> result = Observable.zip(Observable.just(randomStory), Observable.just(randomImage), (String story, Map<String, String> image) -> {
 			return String.format(HTML, story, image.get("imageUrl"));
 		});
 		return result;

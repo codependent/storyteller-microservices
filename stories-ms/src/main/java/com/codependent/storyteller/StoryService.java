@@ -37,9 +37,15 @@ public class StoryService {
 	*/
 	
 	public Observable<String> getRandomStory(){
-		logger.info("getRandomStory()");
-		long random = Math.round(Math.random()*(stories.length-1));
-		return Observable.just(stories[(int)random]);
+		return Observable.create((s)->{
+			logger.info("getRandomStory()");
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {}
+			long random = Math.round(Math.random()*(stories.length-1));
+			s.onNext(stories[(int)random]);
+			s.onCompleted();
+		});
 	}
 	
 	/*
