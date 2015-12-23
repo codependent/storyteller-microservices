@@ -37,6 +37,11 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 10000
+    getAuthor:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000            
   threadpool:
     default:
       coreSize: 50                                
@@ -53,7 +58,14 @@ images-microservice:
     ConnectTimeout: 250
     OkToRetryOnAllOperations: true
     MaxAutoRetriesNextServer: 2
-    MaxAutoRetries: 1               
+    MaxAutoRetries: 1  
+    
+author-ms:
+  ribbon:
+    ConnectTimeout: 250
+    OkToRetryOnAllOperations: true
+    MaxAutoRetriesNextServer: 2
+    MaxAutoRetries: 1                
   
 logging:
 #   file: /var/memento/security.log
@@ -98,6 +110,11 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 10000
+    getAuthor:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000    
   threadpool:
     default:
       coreSize: 50                   
@@ -114,7 +131,14 @@ images-microservice:
     ConnectTimeout: 250
     OkToRetryOnAllOperations: true
     MaxAutoRetriesNextServer: 2
-    MaxAutoRetries: 1        
+    MaxAutoRetries: 1      
+    
+author-ms:
+  ribbon:
+    ConnectTimeout: 250
+    OkToRetryOnAllOperations: true
+    MaxAutoRetriesNextServer: 2
+    MaxAutoRetries: 1    
 
 logging:
 #   file: /var/memento/security.log

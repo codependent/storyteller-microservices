@@ -28,7 +28,7 @@ import com.netflix.hystrix.HystrixCommand;
 @SpringBootApplication
 public class StoryTellerApiApplication {
 
-	private final static String HTML = "<html><p>%s</p><img src='%s' style='height:150px'/></html>";
+	private final static String HTML = "<html><p>%s</p><img src='%s' style='height:150px'/><p>Written by: %s</p></html>";
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
@@ -40,6 +40,9 @@ public class StoryTellerApiApplication {
 	
 	@Autowired
 	private ImageServiceClient isc;
+	
+	@Autowired
+	private AuthorServiceClient asc;
 	
 	@RequestMapping(value="/stories", params={"random=true","format=html"}, produces="text/html")
     public Observable<String> getRandomHtmlStory() {
@@ -53,9 +56,13 @@ public class StoryTellerApiApplication {
 		HystrixCommand<Map<String, String>>  randomImageCommand = isc.getImage(true, "url");
 		Observable<Map<String, String>> randomImage = randomImageCommand.toObservable();
 		
+		//GET AUTHOR
+		HystrixCommand<Map<String, String>>  randomAuthorCommand = asc.getAuthor(true);
+		Observable<Map<String, String>> randomAuthor = randomAuthorCommand.toObservable();
+		
 		//COMPOSE AND PROCESS
-		Observable<String> result = Observable.zip(randomStory, randomImage, (String story, Map<String, String> image) -> {
-			return String.format(HTML, story, image.get("imageUrl"));
+		Observable<String> result = Observable.zip(randomStory, randomImage, randomAuthor, (String story, Map<String, String> image, Map<String, String> author) -> {
+			return String.format(HTML, story, image.get("imageUrl"), author.get("author"));
 		});
 		return result;
     }
@@ -66,15 +73,20 @@ public class StoryTellerApiApplication {
 		
 		//GET STORY
 		HystrixCommand<String> randomStoryCommand = ssc.getStory(true);
-		 String randomStory = randomStoryCommand.execute();
+		String randomStory = randomStoryCommand.execute();
 
 		//GET IMAGE
 		HystrixCommand<Map<String, String>>  randomImageCommand = isc.getImage(true, "url");
 		Map<String, String> randomImage = randomImageCommand.execute();
 		
+		//GET AUTHOR
+		HystrixCommand<Map<String, String>>  randomAuthorCommand = asc.getAuthor(true);
+		Map<String, String> randomAuthor = randomAuthorCommand.execute();
+		
 		//COMPOSE AND PROCESS
-		Observable<String> result = Observable.zip(Observable.just(randomStory), Observable.just(randomImage), (String story, Map<String, String> image) -> {
-			return String.format(HTML, story, image.get("imageUrl"));
+		Observable<String> result = Observable.zip(Observable.just(randomStory), Observable.just(randomImage), Observable.just(randomAuthor), 
+			(String story, Map<String, String> image, Map<String, String> author) -> {
+				return String.format(HTML, story, image.get("imageUrl"), author.get("author"));
 		});
 		return result;
     }
