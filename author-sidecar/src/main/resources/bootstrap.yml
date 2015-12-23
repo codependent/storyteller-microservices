@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: author-ms
+  cloud:
+    config:
+      discovery:
+        enabled: true
+      failFast: true
+      retry:
+        maxAttempts: 100
+        initialInterval: 2000
+        maxInterval: 3000
+        multiplier: 1.5
+        
+server:
+  port: 9595
+
+sidecar:
+  port: 3000
+  health-uri: http://localhost:3000/health.json
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://archimedes2:8762/eureka/,http://archimedes1:8761/eureka/
+    healthcheck:
+      enabled: true
+  
+logging:
+#   file: /var/memento/security.log
+  level:
+    org.springframework.web: 'DEBUG'
