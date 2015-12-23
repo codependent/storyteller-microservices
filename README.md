@@ -18,6 +18,6 @@ Polyglot version integrating a Node.js microservice with Sidecar.
 
 This structure tries to simulate a scenario like the following:
 
-![Microservices architecture](https://raw.githubusercontent.com/codependent/storyteller-microservices/high-availability-rxjava/diagram.png)
+![Microservices architecture](https://raw.githubusercontent.com/codependent/storyteller-microservices/high-availability-rxjava-sidecar/diagram.png)
 
 One API service exposed to clients and two mid tier services, all of them sharing a Eureka server instance (Archimedes) and a ConfigServer that loads the properties from a Git repo.
