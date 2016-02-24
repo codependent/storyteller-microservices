@@ -27,7 +27,7 @@ public class ImageService {
 		return Observable.create((s)->{
 			logger.info("getRandomImage()");
 			try {
-				Thread.sleep(100);
+				Thread.sleep(200);
 			} catch (InterruptedException e) {}
 			long random = Math.round(Math.random()*(images.length-1));
 			s.onNext(images[(int)random]);

@@ -40,7 +40,7 @@ public class StoryService {
 		return Observable.create((s)->{
 			logger.info("getRandomStory()");
 			try {
-				Thread.sleep(100);
+				Thread.sleep(200);
 			} catch (InterruptedException e) {}
 			long random = Math.round(Math.random()*(stories.length-1));
 			s.onNext(stories[(int)random]);

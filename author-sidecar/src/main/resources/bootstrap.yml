@@ -1,6 +1,7 @@
 spring:
   application:
     name: author-ms
+  profiles: author-sidecar1
   cloud:
     config:
       discovery:
@@ -17,7 +18,7 @@ server:
 
 sidecar:
   port: 3000
-  health-uri: http://localhost:3000/health.json
+  health-uri: http://localhost:${sidecar.port}/health.json
 
 eureka:
   client:
@@ -25,6 +26,44 @@ eureka:
       defaultZone: http://archimedes2:8762/eureka/,http://archimedes1:8761/eureka/
     healthcheck:
       enabled: true
+  instance:
+    instanceId: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${server.port}}
+  
+logging:
+#   file: /var/memento/security.log
+  level:
+    org.springframework.web: 'DEBUG'
+---
+spring:
+  application:
+    name: author-ms
+  profiles: author-sidecar2
+  cloud:
+    config:
+      discovery:
+        enabled: true
+      failFast: true
+      retry:
+        maxAttempts: 100
+        initialInterval: 2000
+        maxInterval: 3000
+        multiplier: 1.5
+        
+server:
+  port: 9696
+
+sidecar:
+  port: 3001
+  health-uri: http://localhost:${sidecar.port}/health.json
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://archimedes2:8762/eureka/,http://archimedes1:8761/eureka/
+    healthcheck:
+      enabled: true
+  instance:
+    instanceId: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${server.port}}
   
 logging:
 #   file: /var/memento/security.log
