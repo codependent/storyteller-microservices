@@ -12,7 +12,10 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import rx.Observable;
@@ -41,6 +44,12 @@ public class StoryTellerApiApplication {
 	
 	@Autowired
 	private ImageServiceClient isc;
+	
+	@ExceptionHandler(Exception.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	public void internalServerErrorHandler(Exception e){
+		logger.error("{}",e.toString());
+	}
 	
 	@RequestMapping(value="/stories", params={"random=true","format=html"}, produces="text/html")
     public Single<String> getRandomHtmlStory() {
