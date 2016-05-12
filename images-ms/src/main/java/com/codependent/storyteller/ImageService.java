@@ -1,10 +1,11 @@
 package com.codependent.storyteller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.stereotype.Service;
 
 import rx.Observable;
+import rx.schedulers.Schedulers;
 
 @Service
 public class ImageService {
@@ -21,19 +22,15 @@ public class ImageService {
 		"minion-wolverine.jpg"
 	};
 	
-	private Logger logger = LoggerFactory.getLogger(getClass());
-	
 	public Observable<String> getRandomImage(){
-		return Observable.create((s)->{
-			logger.info("getRandomImage()");
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {}
-			long random = Math.round(Math.random()*(images.length-1));
-			s.onNext(images[(int)random]);
-			s.onCompleted();
-		});
-		
+		return Observable.just(loadRandomImage())
+				  .delay(500, TimeUnit.MILLISECONDS)
+				  .subscribeOn(Schedulers.io());
+	}
+	
+	private String loadRandomImage(){
+		long random = Math.round(Math.random()*(images.length-1));
+		return images[(int)random];
 	}
 	
 }

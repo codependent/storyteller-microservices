@@ -1,13 +1,13 @@
 package com.codependent.storyteller;
 
+import java.util.concurrent.TimeUnit;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import rx.Observable;
-
-import com.netflix.discovery.EurekaClient;
+import rx.schedulers.Schedulers;
 
 @Service
 public class StoryService {
@@ -21,8 +21,8 @@ public class StoryService {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
-	@Autowired
-	private EurekaClient discoveryClient;
+	//@Autowired
+	//private EurekaClient discoveryClient;
 	
 	/*
 	//private RestTemplate restTemplate = new RestTemplate();
@@ -37,15 +37,14 @@ public class StoryService {
 	*/
 	
 	public Observable<String> getRandomStory(){
-		return Observable.create((s)->{
-			logger.info("getRandomStory()");
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {}
-			long random = Math.round(Math.random()*(stories.length-1));
-			s.onNext(stories[(int)random]);
-			s.onCompleted();
-		});
+		return Observable.just(loadRandomStory())
+				  .delay(500, TimeUnit.MILLISECONDS)
+				  .subscribeOn(Schedulers.io());
+	}
+	
+	private String loadRandomStory(){
+		long random = Math.round(Math.random()*(stories.length-1));
+		return stories[(int)random];
 	}
 	
 	/*

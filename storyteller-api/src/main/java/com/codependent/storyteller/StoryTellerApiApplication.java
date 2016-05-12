@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import rx.Observable;
+import rx.Single;
 
 import com.netflix.hystrix.HystrixCommand;
 
@@ -42,26 +43,26 @@ public class StoryTellerApiApplication {
 	private ImageServiceClient isc;
 	
 	@RequestMapping(value="/stories", params={"random=true","format=html"}, produces="text/html")
-    public Observable<String> getRandomHtmlStory() {
+    public Single<String> getRandomHtmlStory() {
 		logger.info("[{}] getRandomHtmlStory()", message);
 		
 		//GET STORY
 		HystrixCommand<String> randomStoryCommand = ssc.getStory(true);
-		Observable<String> randomStory = randomStoryCommand.toObservable();
+		Observable<String> randomStory = randomStoryCommand.observe();
 
 		//GET IMAGE
 		HystrixCommand<Map<String, String>>  randomImageCommand = isc.getImage(true, "url");
-		Observable<Map<String, String>> randomImage = randomImageCommand.toObservable();
+		Observable<Map<String, String>> randomImage = randomImageCommand.observe();
 		
 		//COMPOSE AND PROCESS
 		Observable<String> result = Observable.zip(randomStory, randomImage, (String story, Map<String, String> image) -> {
 			return String.format(HTML, story, image.get("imageUrl"));
 		});
-		return result;
+		return result.toSingle();
     }
 	
 	@RequestMapping(value="/stories", params={"random=true","format=html", "parallel=false"}, produces="text/html")
-    public Observable<String> getRandomHtmlStorySerialExecution() {
+    public Single<String> getRandomHtmlStorySerialExecution() {
 		logger.info("[{}] getRandomHtmlStory()", message);
 		
 		//GET STORY
@@ -76,7 +77,7 @@ public class StoryTellerApiApplication {
 		Observable<String> result = Observable.zip(Observable.just(randomStory), Observable.just(randomImage), (String story, Map<String, String> image) -> {
 			return String.format(HTML, story, image.get("imageUrl"));
 		});
-		return result;
+		return result.toSingle();
     }
 	
     public static void main(String[] args) {

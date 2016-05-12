@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
 
 import rx.Observable;
+import rx.Single;
 
 @RestController
 @EnableEurekaClient
@@ -37,10 +38,10 @@ public class StoryGeneratorMsApplication {
 	private StoryService storyService;
 	
 	@RequestMapping(value="/stories", params="random=true")
-	public Observable<String> getRandomStory(HttpServletResponse response) throws RestClientException, URISyntaxException{
+	public Single<String> getRandomStory(HttpServletResponse response) throws RestClientException, URISyntaxException{
 		logger.info("[{}] generateHtml()", message);
 		Observable<String> story = storyService.getRandomStory();
-		return story;
+		return story.toSingle();
 	}
 	
     public static void main(String[] args) {
