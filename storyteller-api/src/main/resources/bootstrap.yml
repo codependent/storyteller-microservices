@@ -13,6 +13,8 @@ spring:
         initialInterval: 2000
         maxInterval: 3000
         multiplier: 1.5
+
+timing: 2000
     
 server:
   port: 9977
@@ -114,7 +116,9 @@ images-microservice:
     ConnectTimeout: 250
     OkToRetryOnAllOperations: true
     MaxAutoRetriesNextServer: 2
-    MaxAutoRetries: 1        
+    MaxAutoRetries: 1    
+    
+timing: 7000   
 
 logging:
 #   file: /var/memento/security.log

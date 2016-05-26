@@ -50,6 +50,7 @@ hystrix:
 
 storyteller-api:
   ribbon:
+    ReadTimeout: 4000
     ConnectTimeout: 250
     OkToRetryOnAllOperations: true
     MaxAutoRetriesNextServer: 2

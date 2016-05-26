@@ -15,8 +15,16 @@ spring:
   application:
     name: configserver
   cloud:
+    bus: 
+      trace:
+        enabled: true
     config:
       server:
         git:
-          uri: https://github.com/codependent/storyteller-microservices-config
-#         uri: file:///C:/SoftDesarrollo/6-Workspaces/sts/storyteller-microservices-config
+         uri: https://github.com/codependent/storyteller-microservices-config
+#          uri: file:///C:/Users/jinga4x/git/storyteller-microservices-config/
+#        native:
+#          searchLocations: file:///C:/Users/jinga4x/git/storyteller-microservices-config/
+          
+#  profiles:
+#    active: native
