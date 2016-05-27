@@ -1,4 +1,4 @@
-package com.codependent.storyteller;
+package com.codependent.storyteller.client;
 
 import java.util.Map;
 

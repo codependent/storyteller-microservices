@@ -28,12 +28,12 @@ public class CentralLoggerMsApplication {
 	}
 	
 	@StreamListener(LogSink.INPUT)
-	public void processLog(String logMessage) {
-		logger.info("[{}] - RECEIVED LOG MESSAGE: [{}]", new Object[]{env.getActiveProfiles()}, logMessage);
+	public void processLog(LogMessage logMessage) {
+		logger.info("[{}]: [{}]", new Object[]{env.getActiveProfiles()[0]}, logMessage);
 	}
 	
 	public interface LogSink {
-		String INPUT = "logMessages";
+		String INPUT = "processedLogMessages";
 		@Input(LogSink.INPUT)
 		SubscribableChannel input();
 	}

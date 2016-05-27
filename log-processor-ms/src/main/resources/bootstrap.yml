@@ -1,13 +1,13 @@
 ---
 spring:
   application:
-    name: central-logger-ms
-  profiles: cl1
+    name: log-processor-ms
+  profiles: lp1
   cloud:
     stream:
       bindings:
-        processedLogMessages:
-          group: centralLogger
+        rawLogMessages:
+          group: logProcessor
     config:
       discovery:
         enabled: true
@@ -19,7 +19,7 @@ spring:
         multiplier: 1.5
         
 server:
-  port: 12021
+  port: 14041
 
 eureka:
   client:
@@ -30,13 +30,13 @@ eureka:
 ---
 spring:
   application:
-    name: central-logger-ms
-  profiles: cl2
+    name: log-processor-ms
+  profiles: lp2
   cloud:
     stream:
       bindings:
-        processedLogMessages:
-          group: centralLogger
+        rawLogMessages:
+          group: logProcessor
     config:
       discovery:
         enabled: true
@@ -48,7 +48,7 @@ spring:
         multiplier: 1.5
         
 server:
-  port: 21012
+  port: 41014
 
 eureka:
   client:
