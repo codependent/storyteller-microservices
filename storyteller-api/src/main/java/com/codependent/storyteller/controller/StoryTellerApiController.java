@@ -34,9 +34,6 @@ public class StoryTellerApiController {
 	@Value("${storyteller-api-message}")
 	private String message;
 	
-	@Value("${timing}")
-	private Integer timing;
-	
 	@Autowired
 	private StoryServiceClient ssc;
 	
@@ -57,7 +54,21 @@ public class StoryTellerApiController {
     public Single<String> getRandomHtmlStory() {
 		logger.info("[{}] getRandomHtmlStory() - parallel", message);
 		publishLog();		
-		return Observable.just(new String()).delay(timing, TimeUnit.MILLISECONDS).toSingle();
+		
+		//GET STORY
+		HystrixCommand<String> randomStoryCommand = ssc.getStory(true);
+		Observable<String> randomStory = randomStoryCommand.observe();
+
+		//GET IMAGE
+		HystrixCommand<Map<String, String>>  randomImageCommand = isc.getImage(true, "url");
+		Observable<Map<String, String>> randomImage = randomImageCommand.observe();
+		
+		//COMPOSE AND PROCESS
+		Observable<String> result = Observable.zip(randomStory, randomImage, (String story, Map<String, String> image) -> {
+			return String.format(HTML, story, image.get("imageUrl"));
+		});
+		
+		return result.toSingle();
     }
 	
 	@RequestMapping(value="/stories", params={"random=true","format=html", "parallel=false"}, produces="text/html")

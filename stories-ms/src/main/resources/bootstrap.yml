@@ -1,5 +1,7 @@
 ---
 spring:
+  zipkin:
+    base-url: http://192.168.99.100:8080/
   application:
     name: stories-microservice
   profiles: stories1
@@ -31,6 +33,8 @@ logging:
     com.netflix: 'DEBUG'
 ---
 spring:
+  zipkin:
+    base-url: http://192.168.99.100:8080/
   application:
     name: stories-microservice
   profiles: stories2

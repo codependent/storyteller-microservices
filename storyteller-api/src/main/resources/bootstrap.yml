@@ -1,5 +1,7 @@
 ---
 spring:
+  zipkin:
+    base-url: http://192.168.99.100:8080/
   application:
     name: storyteller-api
   profiles: storyteller-api1
@@ -14,8 +16,6 @@ spring:
         maxInterval: 3000
         multiplier: 1.5
 
-timing: 2000
-    
 server:
   port: 9977
 
@@ -60,9 +60,11 @@ images-microservice:
 logging:
 #   file: /var/memento/security.log
   level:
-    org.springframework.web: 'DEBUG'
+    org.springframework.cloud.sleuth: 'DEBUG'
 ---
 spring:
+  zipkin:
+    base-url: http://192.168.99.100:8080/
   application:
     name: storyteller-api
   profiles: storyteller-api2
@@ -118,9 +120,7 @@ images-microservice:
     MaxAutoRetriesNextServer: 2
     MaxAutoRetries: 1    
     
-timing: 7000   
-
 logging:
 #   file: /var/memento/security.log
   level:
-    org.springframework.web: 'DEBUG'
+    org.springframework.cloud.sleuth: 'DEBUG'
