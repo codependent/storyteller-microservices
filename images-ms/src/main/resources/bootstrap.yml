@@ -1,5 +1,7 @@
 ---
 spring:
+  zipkin:
+    base-url: http://192.168.99.100:8080/
   application:
     name: images-microservice
   profiles: images1
@@ -33,6 +35,8 @@ logging:
     org.springframework.web: 'DEBUG'
 ---
 spring:
+  zipkin:
+    base-url: http://192.168.99.100:8080/
   application:
     name: images-microservice
   profiles: images2

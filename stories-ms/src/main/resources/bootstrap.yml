@@ -59,21 +59,6 @@ eureka:
     healthcheck:
       enabled: true
   
-hystrix:
-  command:
-    getImage:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 20000
-
-images-microservice:
-  ribbon:
-    ConnectTimeout: 250
-    OkToRetryOnAllOperations: true
-    MaxAutoRetriesNextServer: 2
-    MaxAutoRetries: 2
-  
 logging:
 #   file: /var/memento/security.log
   level:
