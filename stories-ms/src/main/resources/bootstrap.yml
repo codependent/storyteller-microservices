@@ -23,8 +23,6 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://archimedes1:8761/eureka/,http://archimedes2:8762/eureka/
-    healthcheck:
-      enabled: true
   
 logging:
 #   file: /var/memento/security.log
@@ -56,8 +54,6 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://archimedes1:8761/eureka/,http://archimedes2:8762/eureka/
-    healthcheck:
-      enabled: true
   
 logging:
 #   file: /var/memento/security.log

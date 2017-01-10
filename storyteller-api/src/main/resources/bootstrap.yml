@@ -23,8 +23,6 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://archimedes1:8761/eureka/,http://archimedes2:8762/eureka/
-    healthcheck:
-      enabled: true
 #   registerWithEureka: false
   
 hystrix:
@@ -86,8 +84,6 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://archimedes1:8761/eureka/,http://archimedes2:8762/eureka/
-    healthcheck:
-      enabled: true
 #   registerWithEureka: false
   
 hystrix:
