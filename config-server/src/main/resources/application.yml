@@ -25,6 +25,10 @@ spring:
 #          uri: file:///C:/Users/jinga4x/git/storyteller-microservices-config/
 #        native:
 #          searchLocations: file:///C:/Users/jinga4x/git/storyteller-microservices-config/
-          
+  rabbitmq:
+    host: my-rabbit
+    port: 5672
+    username: guest
+    password: guest        
 #  profiles:
 #    active: native

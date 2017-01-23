@@ -1,5 +1,7 @@
 ---
 spring:
+  application:
+    name: archimedes
   profiles: archimedes1
 
 server:
@@ -21,6 +23,8 @@ logging:
 ---
 
 spring:
+  application:
+    name: archimedes
   profiles: archimedes2
 
 server:
