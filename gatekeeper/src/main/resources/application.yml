@@ -1,4 +1,6 @@
 eureka:
+  instance:
+    hostname: gatekeeper
   client:
     healthcheck:
       enabled: true

@@ -5,6 +5,8 @@ info:
   description: Spring Cloud Config Server
   
 eureka:
+  instance:
+    hostname: config-server
   client:
     serviceUrl:
       defaultZone: http://archimedes1:8761/eureka/,http://archimedes2:8762/eureka/

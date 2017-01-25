@@ -5,6 +5,7 @@ spring:
     name: gatekeeper
   cloud:
     config:
+      uri: http://config-server:8888
       discovery:
         enabled: true
       failFast: true
@@ -20,7 +21,7 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/
+      defaultZone: http://archimedes1:8761/eureka/,http://archimedes2:8762/eureka/
 #   registerWithEureka: false
 
 zuul:

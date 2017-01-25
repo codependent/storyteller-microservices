@@ -15,11 +15,18 @@ spring:
         initialInterval: 2000
         maxInterval: 3000
         multiplier: 1.5
+  rabbitmq:
+    host: my-rabbit
+    port: 5672
+    username: guest
+    password: guest   
         
 server:
   port: 9988
 
 eureka:
+  instance:
+    hostname: stories-microservice
   client:
     serviceUrl:
       defaultZone: http://archimedes1:8761/eureka/,http://archimedes2:8762/eureka/
@@ -38,6 +45,7 @@ spring:
   profiles: stories2
   cloud:
     config:
+      uri: http://config-server:8888
       discovery:
         enabled: true
       failFast: true
@@ -46,11 +54,18 @@ spring:
         initialInterval: 2000
         maxInterval: 3000
         multiplier: 1.5
+  rabbitmq:
+    host: my-rabbit
+    port: 5672
+    username: guest
+    password: guest   
         
 server:
   port: 9987
 
 eureka:
+  instance:
+    hostname: stories-microservice
   client:
     serviceUrl:
       defaultZone: http://archimedes1:8761/eureka/,http://archimedes2:8762/eureka/

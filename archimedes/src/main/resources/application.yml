@@ -20,6 +20,8 @@ logging:
 #   file: /var/memento/security.log
     level:
         org.springframework.web: 'DEBUG'
+        org.springframework.cloud: 'DEBUG'
+        com.netflix: 'DEBUG'
 ---
 
 spring:
@@ -44,3 +46,5 @@ logging:
 #   file: /var/memento/security.log
     level:
         org.springframework.web: 'DEBUG'
+        org.springframework.cloud: 'DEBUG'
+        com.netflix: 'DEBUG'
