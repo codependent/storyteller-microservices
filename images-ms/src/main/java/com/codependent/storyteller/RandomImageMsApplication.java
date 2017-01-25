@@ -1,7 +1,5 @@
 package com.codependent.storyteller;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -61,7 +59,8 @@ public class RandomImageMsApplication {
 	
 	@RequestMapping("/images/{image:.+}")
 	public void getRandomImage(@PathVariable String image, HttpServletResponse response) throws Exception {
-		InputStream is = new FileInputStream(new File(getClass().getResource("/images/"+image).toURI()));
+		//InputStream is = new FileInputStream(new File(getClass().getResource("/images/"+image).toURI()));
+		InputStream is  = Thread.currentThread().getContextClassLoader().getResourceAsStream("/images/"+image);
 		ServletOutputStream os = response.getOutputStream();
 		IOUtils.copy(is, os);
 		response.setContentType("image/jpg");
