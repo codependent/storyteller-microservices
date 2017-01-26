@@ -1,0 +1,94 @@
+version: '2'
+services:
+
+  archimedes1:
+    image: "storyteller/archimedes"
+    ports:
+     - "8761:8761"
+    environment:
+      SPRING_PROFILES_ACTIVE: archimedes1
+      
+  archimedes2:
+    image: "storyteller/archimedes"
+    ports:
+     - "8762:8762"
+    environment:
+      SPRING_PROFILES_ACTIVE: archimedes2
+     
+  my-rabbit:
+    image: "rabbitmq:3"
+    ports:
+     - "5672:5672"
+      
+  config-server:
+    image: "storyteller/config-server"
+    ports:
+     - "8888:8888"
+    depends_on:
+      - my-rabbit
+     
+  gatekeeper:
+    image: "storyteller/gatekeeper"
+    ports:
+     - "9966:9966"
+    depends_on:
+      - archimedes1
+      - archimedes2
+      - config-server
+
+  storyteller-api1:
+    image: "storyteller/storyteller-api"
+    ports:
+     - "9977:9977"
+    environment:
+      SPRING_PROFILES_ACTIVE: storyteller-api1
+    depends_on:
+      - gatekeeper
+      
+  storyteller-api2:
+    image: "storyteller/storyteller-api"
+    ports:
+     - "7799:7799"
+    environment:
+      SPRING_PROFILES_ACTIVE: storyteller-api2
+    depends_on:
+      - gatekeeper
+      
+  images1:
+    image: "storyteller/images-ms"
+    ports:
+     - "9999:9999"
+    environment:
+      SPRING_PROFILES_ACTIVE: images1
+    depends_on:
+      - gatekeeper
+      
+  images2:
+    image: "storyteller/images-ms"
+    ports:
+     - "9998:9998"
+    environment:
+      SPRING_PROFILES_ACTIVE: images2
+    depends_on:
+      - gatekeeper
+      
+  stories1:
+    image: "storyteller/stories-ms"
+    ports:
+     - "9988:9988"
+    environment:
+      SPRING_PROFILES_ACTIVE: stories1
+    depends_on:
+      - gatekeeper
+      
+  stories2:
+    image: "storyteller/stories-ms"
+    ports:
+     - "9987:9987"
+    environment:
+      SPRING_PROFILES_ACTIVE: stories2
+    depends_on:
+      - gatekeeper
+      
+
+     
