@@ -90,5 +90,10 @@ services:
     depends_on:
       - gatekeeper
       
-
+  hystrix-dashboard:
+    image: "storyteller/hystrix-dashboard"
+    ports:
+      - "10000:10000"
+    depends_on:
+      - gatekeeper
      
