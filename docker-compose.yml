@@ -2,6 +2,9 @@ version: '2'
 services:
 
   archimedes1:
+    extends:
+      file: docker-compose-base.yml
+      service: base
     image: "storyteller/archimedes"
     ports:
      - "8761:8761"
@@ -9,6 +12,9 @@ services:
       SPRING_PROFILES_ACTIVE: archimedes1
       
   archimedes2:
+    extends:
+      file: docker-compose-base.yml
+      service: base
     image: "storyteller/archimedes"
     ports:
      - "8762:8762"
@@ -16,11 +22,17 @@ services:
       SPRING_PROFILES_ACTIVE: archimedes2
      
   my-rabbit:
+    extends:
+      file: docker-compose-base.yml
+      service: base
     image: "rabbitmq:3"
     ports:
      - "5672:5672"
       
   config-server:
+    extends:
+      file: docker-compose-base.yml
+      service: base
     image: "storyteller/config-server"
     ports:
      - "8888:8888"
@@ -28,6 +40,9 @@ services:
       - my-rabbit
      
   gatekeeper:
+    extends:
+      file: docker-compose-base.yml
+      service: base
     image: "storyteller/gatekeeper"
     ports:
      - "9966:9966"
@@ -37,6 +52,9 @@ services:
       - config-server
 
   storyteller-api1:
+    extends:
+      file: docker-compose-base.yml
+      service: base
     image: "storyteller/storyteller-api"
     ports:
      - "9977:9977"
@@ -46,6 +64,9 @@ services:
       - gatekeeper
       
   storyteller-api2:
+    extends:
+      file: docker-compose-base.yml
+      service: base
     image: "storyteller/storyteller-api"
     ports:
      - "7799:7799"
@@ -55,6 +76,9 @@ services:
       - gatekeeper
       
   images1:
+    extends:
+      file: docker-compose-base.yml
+      service: base
     image: "storyteller/images-ms"
     ports:
      - "9999:9999"
@@ -64,6 +88,9 @@ services:
       - gatekeeper
       
   images2:
+    extends:
+      file: docker-compose-base.yml
+      service: base
     image: "storyteller/images-ms"
     ports:
      - "9998:9998"
@@ -73,6 +100,9 @@ services:
       - gatekeeper
       
   stories1:
+    extends:
+      file: docker-compose-base.yml
+      service: base
     image: "storyteller/stories-ms"
     ports:
      - "9988:9988"
@@ -82,6 +112,9 @@ services:
       - gatekeeper
       
   stories2:
+    extends:
+      file: docker-compose-base.yml
+      service: base
     image: "storyteller/stories-ms"
     ports:
      - "9987:9987"
@@ -91,6 +124,9 @@ services:
       - gatekeeper
       
   hystrix-dashboard:
+    extends:
+      file: docker-compose-base.yml
+      service: base
     image: "storyteller/hystrix-dashboard"
     ports:
       - "10000:10000"

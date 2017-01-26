@@ -1,0 +1,14 @@
+version: '2'
+services:
+
+  base:
+    extra_hosts:
+      archimedes1: 192.168.99.100
+      archimedes2: 192.168.99.100
+      my-rabbit: 192.168.99.100
+      config-server: 192.168.99.100
+      gatekeeper: 192.168.99.100
+      stories-microservice: 192.168.99.100
+      images-microservice: 192.168.99.100
+      storyteller-api: 192.168.99.100
+      hystrix-dashboard: 192.168.99.100
