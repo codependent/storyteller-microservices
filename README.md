@@ -22,6 +22,6 @@ One API service exposed to clients and two mid tier services, all of them sharin
 * **no-config-server**: same as master without using a centralized config-server.
 * **zuul**: uses a zuul reverse-proxy instead of storyteller-api gateway.
 * **high-availability**: high availability environment using two eureka registers, a zuul reverse proxy, and 2 instances of each service.
-* **high-availability-rxjava**: Same as above but using reactive programming. It also adds 2 **Spring Cloud Stream** microservices, a log processor and a central logger. Uses **Spring Cloud Sleuth** in all microservices for request tracing in **Zipkin**.
+* **high-availability-rxjava**: Same as above but using reactive programming. It also adds 2 **Spring Cloud Stream** microservices, a log processor and a central logger. Uses **Spring Cloud Sleuth** in all microservices for request tracing in **Zipkin**. The projects have been dockerized and can be launched using docker compose.
 * **high-availability-rxjava-sidecar**: Polyglot version in which Sidecar integrates a Node.js microservice.
 * **consul**: Consul replaces Eureka Server as microservice registry.
