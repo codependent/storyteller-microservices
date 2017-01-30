@@ -51,6 +51,63 @@ services:
       - archimedes2
       - config-server
 
+  central-logger1:
+    extends:
+      file: docker-compose-base.yml
+      service: base
+    image: "storyteller/central-logger-ms"
+    ports:
+     - "12021:12021"
+    environment:
+      SPRING_PROFILES_ACTIVE: cl1
+    depends_on:
+      - archimedes1
+      - archimedes2
+      - config-server
+      
+  central-logger2:
+    extends:
+      file: docker-compose-base.yml
+      service: base
+    image: "storyteller/central-logger-ms"
+    ports:
+     - "21012:21012"
+    environment:
+      SPRING_PROFILES_ACTIVE: cl2
+    depends_on:
+      - archimedes1
+      - archimedes2
+      - config-server
+      
+  log-processor1:
+    extends:
+      file: docker-compose-base.yml
+      service: base
+    image: "storyteller/log-processor-ms"
+    ports:
+     - "14041:14041"
+    environment:
+      SPRING_PROFILES_ACTIVE: lp1
+    depends_on:
+      - archimedes1
+      - archimedes2
+      - config-server
+      
+  log-processor2:
+    extends:
+      file: docker-compose-base.yml
+      service: base
+    image: "storyteller/log-processor-ms"
+    ports:
+     - "41014:41014"
+    environment:
+      SPRING_PROFILES_ACTIVE: lp2
+    depends_on:
+      - archimedes1
+      - archimedes2
+      - config-server
+
+
   storyteller-api1:
     extends:
       file: docker-compose-base.yml
@@ -74,7 +131,7 @@ services:
       SPRING_PROFILES_ACTIVE: storyteller-api2
     depends_on:
       - gatekeeper
-      
+   
   images1:
     extends:
       file: docker-compose-base.yml

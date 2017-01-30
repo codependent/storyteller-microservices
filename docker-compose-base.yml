@@ -12,3 +12,5 @@ services:
       images-microservice: 192.168.99.100
       storyteller-api: 192.168.99.100
       hystrix-dashboard: 192.168.99.100
+      central-logger: 192.168.99.100
+      log-processor: 192.168.99.100

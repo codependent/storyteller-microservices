@@ -9,6 +9,7 @@ spring:
         rawLogMessages:
           group: logProcessor
     config:
+      uri: http://config-server:8888
       discovery:
         enabled: true
       failFast: true
@@ -17,6 +18,11 @@ spring:
         initialInterval: 2000
         maxInterval: 3000
         multiplier: 1.5
+  rabbitmq:
+    host: my-rabbit
+    port: 5672
+    username: guest
+    password: guest   
         
 server:
   port: 14041
@@ -36,6 +42,7 @@ spring:
         rawLogMessages:
           group: logProcessor
     config:
+      uri: http://config-server:8888
       discovery:
         enabled: true
       failFast: true
@@ -44,6 +51,11 @@ spring:
         initialInterval: 2000
         maxInterval: 3000
         multiplier: 1.5
+  rabbitmq:
+    host: my-rabbit
+    port: 5672
+    username: guest
+    password: guest   
         
 server:
   port: 41014

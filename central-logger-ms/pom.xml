@@ -12,15 +12,10 @@
 
 	<groupId>com.codependent.storyteller.stream</groupId>
 	<artifactId>central-logger-ms</artifactId>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>central-logger-ms</name>
 	<description>Demo project for Spring Boot</description>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
-	</properties>
 
 	<dependencies>
 		<dependency>
@@ -75,6 +70,10 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+	            <groupId>com.spotify</groupId>
+	            <artifactId>docker-maven-plugin</artifactId>
+	        </plugin>
 		</plugins>
 	</build>
 	
